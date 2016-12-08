@@ -6,7 +6,7 @@ export default function (props) {
   const artist = props.selectedArtist;
   const albums = artist.albums || [];
   const songs = artist.songs || [];
-  console.log();
+
   return (
     <div>
       <h3>{ artist.name }</h3>

@@ -61,24 +61,21 @@ export const loadAllSongs = () => {
 };
 
 export const addSongToPlaylist = (playlistId, songId) => {
-
+  console.log(playlistId, songId);
   return (dispatch, getState) => {
 
+
     return axios.post(`/api/playlists/${playlistId}/songs`, {
-      id: songId
-    })
-      .then(res => res.data)
-      .then(song => {
+        id: songId
+      })
+      .then(() => {
+        return axios.get(`/api/playlists/${playlistId}/songs`);
+      })
+      .then(({data}) => {
+        const playlist = getState().playlists.list.find(playlist => playlist.id === playlistId);
+        playlist.songs = data;
 
-        const selectedPlaylist = getState().playlists.selected;
-        const songs = selectedPlaylist.songs;
-        const newSongs = songs.concat([convertSong(song)]);
-        const newSelectedPlaylist = Object.assign({}, selectedPlaylist, {
-          songs: newSongs
-        });
-
-        dispatch(receivePlaylist(newSelectedPlaylist));
-
+        dispatch(receivePlaylist(playlist));
       });
 
   };

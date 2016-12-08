@@ -62,9 +62,7 @@ const onStationsEnter = function(nextRouterState) {
   store.dispatch(loadAllSongs())
 }
 
-const onArtistsEnter = function(nextRouterState) {
-  store.dispatch(receiveArtists())
-}
+
 
 ReactDOM.render(
   <Provider store={store}>
@@ -72,7 +70,7 @@ ReactDOM.render(
       <Route path="/" component={App} onEnter={onAppEnter}>
         <Route path="/albums" component={AlbumsContainer}/>
         <Route path="/albums/:albumId" component={AlbumContainer} onEnter={onAlbumEnter}/>
-        <Route path="/artists" onEnter={onArtistsEnter} component={FilterableArtistsContainer}/>
+        <Route path="/artists" component={FilterableArtistsContainer}/>
         <Route path="/artists/:artistId" component={ArtistContainer} onEnter={onArtistEnter}>
           <Route path="albums" component={AlbumsContainer}/>
           <Route path="songs" component={SongsContainer}/>

@@ -11,7 +11,7 @@ export default function (props) {
       </div>
       <div className="col-xs-10">
         {
-          props.children && React.cloneElement(props.children, props)
+          props.children && React.cloneElement(props.children)
         }
       </div>
       <PlayerContainer />

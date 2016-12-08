@@ -6,13 +6,16 @@ class FilterableArtists extends React.Component {
 
   constructor(props) {
     super(props);
-
     this.state = Object.assign({
       inputValue: ''
-    }, {list: props.artists});
+    }, {list: this.props.artists});
 
     this.handleChange = this.handleChange.bind(this);
 
+  }
+
+  componentWillReceiveProps(nextProps){
+    this.setState({list: nextProps.artists})
   }
 
   handleChange(e) {
@@ -24,6 +27,8 @@ class FilterableArtists extends React.Component {
   render() {
 
     const inputValue = this.state.inputValue;
+    console.log('filterable artists state', this.state)
+    console.log('filterable artist props', this.props)
     const filteredArtists = this.state.list.filter(artist => artist.name.match(inputValue));
 
     return (

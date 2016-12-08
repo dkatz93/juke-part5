@@ -1,4 +1,5 @@
 import React from 'react';
+import SongContainer from '../containers/SongContainer';
 
 export default function (props) {
 
@@ -6,8 +7,6 @@ export default function (props) {
   const currentSong = props.currentSong;
   const isPlaying = props.isPlaying;
   const toggle = props.actions.toggleSong;
-
-  console.log(props)
   
   return (
     <table className='table'>
@@ -22,18 +21,7 @@ export default function (props) {
       <tbody>
         {
           songs && songs.map(song => (
-            <tr key={song.id}>
-              <td>
-                <button className="btn btn-default btn-xs" onClick={() => toggle(song, songs)}>
-                  <span className={song.id === currentSong.id && isPlaying ? "glyphicon glyphicon-pause" : "glyphicon glyphicon-play"}></span>
-                </button>
-              </td>
-              <td>{ song.name }</td>
-              <td>
-                <span>{ song.artists ? song.artists.map(artist => artist.name).join(', ') : null }</span>
-              </td>
-              <td>{ song.genre }</td>
-            </tr>
+            <SongContainer key={song.id} song={song} songs={songs} />
           ))
         }
       </tbody>
